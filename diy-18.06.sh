@@ -76,8 +76,8 @@ git clone --depth=1 -b lua https://github.com/sbwml/luci-app-alist package/luci-
 # Golang
 git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
-# DDNS-GO
-git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
+# quickstart
+git clone --depth=1 https://github.com/animegasan/luci-app-quickstart package/luci-app-quickstart
 
 # iStore
 git_sparse_clone main https://github.com/linkease/istore-ui app-store-ui
