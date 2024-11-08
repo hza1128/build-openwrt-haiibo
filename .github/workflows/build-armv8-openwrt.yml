@@ -28,7 +28,7 @@ jobs:
 
     env:
       DIY_SCRIPT: diy-${{ matrix.version }}.sh
-      RELEASE_TAG: ARMv8-${{ matrix.version }}
+      RELEASE_TAG: armv8-${{ matrix.version }}
 
     steps:
     - name: Checkout
@@ -36,13 +36,13 @@ jobs:
 
     - name: Set Compile Source Code
       run: |
-        if [ ${{ matrix.version }} == 18.06 ]; then
-          REPO_URL=https://github.com/coolsnowwolf/lede
-          REPO_BRANCH=master
+        if [ ${{ matrix.version }} == '18.06' ]; then
+          REPO_URL="https://github.com/coolsnowwolf/lede"
+          REPO_BRANCH="master"
           echo -e "CONFIG_TARGET_armvirt=y\nCONFIG_TARGET_armvirt_64=y" >> $CONFIG_FILE
-        elif [ ${{ matrix.version }} == 23.05 ]; then
-          REPO_URL=https://github.com/immortalwrt/immortalwrt
-          REPO_BRANCH=openwrt-23.05
+        elif [ ${{ matrix.version }} == '23.05' ]; then
+          REPO_URL="https://github.com/immortalwrt/immortalwrt"
+          REPO_BRANCH="openwrt-23.05"
           echo -e "CONFIG_TARGET_armsr=y\nCONFIG_TARGET_armsr_armv8=y" >> $CONFIG_FILE
         fi
         echo "REPO_URL=$REPO_URL" >> $GITHUB_ENV
@@ -139,7 +139,7 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRT_PATH
-        if [ ${{ matrix.version }} == 18.06 ]; then
+        if [ $SOURCE_REPO == 'lede' ]; then
           sed -i '/luci/s/^#//; /openwrt-23.05/s/^/#/' feeds.conf.default
         fi
         ./scripts/feeds update -a
@@ -210,7 +210,7 @@ jobs:
         rm -rf packages u-boot-qemu* feeds.buildinfo version.buildinfo sha256sums *.manifest *.bin
         echo "FIRMWARE_PATH=$PWD" >> $GITHUB_ENV
         cd $PACKAGED_OUTPUTPATH && rm -f *rootfs.tar.gz *.sha
-        if [ ${{ matrix.version }} == 23.05 ]; then
+        if [ $SOURCE_REPO == 'immortalwrt' ]; then
           rename 's/openwrt/${{ env.SOURCE_REPO }}/' *
         fi
 

@@ -28,7 +28,7 @@ jobs:
 
     env:
       DIY_SCRIPT: diy-${{ matrix.version }}.sh
-      RELEASE_TAG: X86-64-${{ matrix.version }}
+      RELEASE_TAG: x86-64-${{ matrix.version }}
 
     steps:
     - name: Checkout
@@ -36,12 +36,12 @@ jobs:
 
     - name: Set Compile Source Code
       run: |
-        if [ ${{ matrix.version }} == 18.06 ]; then
-          REPO_URL=https://github.com/coolsnowwolf/lede
-          REPO_BRANCH=master
-        elif [ ${{ matrix.version }} == 23.05 ]; then
-          REPO_URL=https://github.com/immortalwrt/immortalwrt
-          REPO_BRANCH=openwrt-23.05
+        if [ ${{ matrix.version }} == '18.06' ]; then
+          REPO_URL="https://github.com/coolsnowwolf/lede"
+          REPO_BRANCH="master"
+        elif [ ${{ matrix.version }} == '23.05' ]; then
+          REPO_URL="https://github.com/immortalwrt/immortalwrt"
+          REPO_BRANCH="openwrt-23.05"
         fi
         echo "REPO_URL=$REPO_URL" >> $GITHUB_ENV
         echo "REPO_BRANCH=$REPO_BRANCH" >> $GITHUB_ENV
@@ -137,7 +137,7 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRT_PATH
-        if [ ${{ matrix.version }} == 18.06 ]; then
+        if [ $SOURCE_REPO == 'lede' ]; then
           sed -i '/luci/s/^#//; /openwrt-23.05/s/^/#/' feeds.conf.default
         fi
         ./scripts/feeds update -a
