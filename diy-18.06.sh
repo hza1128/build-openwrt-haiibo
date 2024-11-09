@@ -70,7 +70,7 @@ sed -i "s|ARMv8|$RELEASE_TAG|g" package/luci-app-amlogic/root/etc/config/amlogic
 #git clone --depth=1 -b lua https://github.com/sbwml/luci-app-alist package/luci-app-alist
 
 # Golang
-#git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # DDNS-GO
 # git clone --depth=1 https://github.com/sirpdboy/luci-app-ddns-go package/luci-app-ddns-go
