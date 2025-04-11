@@ -238,7 +238,7 @@ destination_dir="package/A"
 color cy "添加&替换插件"
 
 # 添加额外插件
-git_clone https://github.com/lq-wq/luci-app-quickstart
+clone_all https://github.com/linkease/nas-packages-luci luci
 git_clone https://github.com/kongfl888/luci-app-adguardhome
 clone_all https://github.com/sirpdboy/luci-app-ddns-go
 
@@ -252,8 +252,8 @@ git_clone https://github.com/pymumu/openwrt-smartdns smartdns
 git_clone https://github.com/ximiTech/luci-app-msd_lite
 git_clone https://github.com/ximiTech/msd_lite
 
-clone_all https://github.com/linkease/istore-ui
-clone_all https://github.com/linkease/istore luci
+# clone_all https://github.com/linkease/istore-ui
+# clone_all https://github.com/linkease/istore luci
 
 
 # 科学上网插件
