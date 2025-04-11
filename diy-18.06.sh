@@ -238,6 +238,7 @@ destination_dir="package/A"
 color cy "添加&替换插件"
 
 # 添加额外插件
+git_clone https://github.com/animegasan/luci-app-quickstart
 git_clone https://github.com/kongfl888/luci-app-adguardhome
 clone_all https://github.com/sirpdboy/luci-app-ddns-go
 
