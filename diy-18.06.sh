@@ -252,8 +252,9 @@ git_clone https://github.com/pymumu/openwrt-smartdns smartdns
 git_clone https://github.com/ximiTech/luci-app-msd_lite
 git_clone https://github.com/ximiTech/msd_lite
 
-clone_all https://github.com/linkease/istore-ui
-clone_all https://github.com/linkease/istore luci
+#clone_all https://github.com/linkease/istore-ui
+#clone_all https://github.com/linkease/istore luci
+clone_all https://github.com/zijieKwok/linkease/luci
 
 
 # 科学上网插件
