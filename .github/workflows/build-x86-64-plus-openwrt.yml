@@ -1,4 +1,4 @@
-name: build x86/64 openwrt
+name: build x86/64 plus openwrt
 
 on:
 #  schedule: [cron: 30 14 */3 * *]
