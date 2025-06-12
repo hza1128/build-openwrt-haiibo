@@ -18,11 +18,11 @@ on:
         required: false
         default: '192.168.10.11'
 
-#      free_disk:
-#        description: '清理释放磁盘空间'
-#        required: false
-#        default: false
-#        type: boolean
+      free_disk:
+        description: '清理释放磁盘空间'
+        required: false
+        default: false
+        type: boolean
 
       toolchain:
         description: '使用toolchain缓存'
