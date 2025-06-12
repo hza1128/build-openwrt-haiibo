@@ -226,31 +226,30 @@ jobs:
           rename 's/openwrt/${{ env.SOURCE_REPO }}/' *
         fi
 
-    - name: Upload OpenWrt To Artifact
-      if: env.PACKAGED_STATUS == 'success' && github.event.inputs.artifact == 'true'
+    - name: Upload Firmware To Artifact
+      if: steps.compile.outputs.status == 'success' && env.FIRMWARE_RELEASE != 'true'
       uses: actions/upload-artifact@main
       with:
-        name: ${{ env.SOURCE_REPO }}-${{ env.LITE_BRANCH }}-${{ env.DEVICE_TARGET }}-firmware-${{ env.FILE_DATE }}
-        path: ${{ env.PACKAGED_OUTPUTPATH }}
+        name: ${{ env.SOURCE_REPO }}-firmware-${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }}-${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE_PATH }}
 
-    - name: Upload OpenWrt To Release
-      if: env.PACKAGED_STATUS == 'success' && github.event.inputs.release == 'true'
-      uses: ncipollo/release-action@main
+    - name: Upload Firmware To Release
+      if: steps.compile.outputs.status == 'success' && env.FIRMWARE_RELEASE == 'true'
+      uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} for ${{ env.DEVICE_TARGET }}
+        name: R${{ env.DATE }} for ${{ env.FIRMWARE_TAG }}
         allowUpdates: true
-        removeArtifacts: true
-        tag: ${{ env.RELEASE_TAG }}
+        tag: ${{ env.FIRMWARE_TAG }}
         token: ${{ secrets.GIT_TOKEN }}
-        artifacts: ${{ env.FIRMWARE_PATH }}/*,${{ env.PACKAGED_OUTPUTPATH }}/*
+        artifacts: ${{ env.FIRMWARE_PATH }}/*
         body: |
-          **This is ${{ env.SOURCE_REPO }} firmware for ${{ env.DEVICE_TARGET }}**
+          **This is OpenWrt Firmware for ${{ env.FIRMWARE_TAG }}**
           ### 📒 固件信息
-          - 💻 平台架构: ${{ env.DEVICE_TARGET }}
+          - 💻 平台架构: ${{ env.DEVICE_TARGET }}-${{ env.DEVICE_SUBTARGET }} (rk33xx, rk35xx)
           - ⚽ 固件源码: ${{ env.REPO_URL }}
           - 💝 源码分支: ${{ env.REPO_BRANCH }}
-          - 🚀 内核版本: ${{ env.KERNEL_VERSION }}
-          - 🌐 默认地址: ${{ env.DEFAULT_IP }}
+          - 🚀 内核版本: ${{ env.KERNEL }}
+          - 🌐 默认地址: 192.168.10.11
           - 🔑 默认密码: password
           ### 🧊 固件版本
           - 固件编译前最后一次➦[主源码](${{ env.REPO_URL }})更新记录
